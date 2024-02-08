@@ -13,7 +13,7 @@ let config = {
 }
 //for the arrow keys and pressing space to start the game
 let game = new Phaser.Game(config)
-let keySPACE, keyRIGHT, keyLEFT, keyONE, keyTWO, keyTHREE, keyFOUR
+let keySPACE, keyRIGHT, keyLEFT, keyONE, keyTWO, keyTHREE, keyFOUR, keyRESET, keyMENU
 //set UI sizes
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3

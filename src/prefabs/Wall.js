@@ -23,6 +23,4 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
             this.destroy()
         }
     }
-
-    //add the state machine here too 
 }

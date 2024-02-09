@@ -4,24 +4,23 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
         this.setImmovable()
+        this.setCollideWorldBounds(true);
         this.speed = speed
         this.hit = false
         this.triangle = false
         this.circle = false 
         this.square = false 
-        this.default = false 
+        this.default = false
+        this.setDragY(80)
+        this.setBounce(0.1) 
     }
 
     update(){
-        if(Phaser.Input.Keyboard.JustDown(keyUP)){
-            this.body.velocity.x += 20
-        }
-        if(Phaser.Input.Keyboard.JustDown(keyDOWN)){
+        if(keyUP.isDown){
             this.body.velocity.y -= 20
         }
-    }
-
-    getHit(){
-        return this.hit
+        if(keyDOWN.isDown){
+            this.body.velocity.y += 20
+        }
     }
 }

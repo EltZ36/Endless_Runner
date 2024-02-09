@@ -19,16 +19,24 @@ class Play extends Phaser.Scene{
         keyFOUR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR)
         this.anims.create({
             key: 'wall-hit',
-            frameRate: 5,
+            frameRate: 4,
             repeat: -1, 
             frames: this.anims.generateFrameNumbers('player', {start: 0, end: 3})
         })
+        this.physics.add.collider(
+            this.player,
+            this.wallGroup,
+            this.collideWall,
+            null,
+            this,
+        )
     }
 
     update(){ 
         this.player.update()
     }
 
+    //could do this in wall.update() instead for the boom animation
     addWall(){
         //let speed = 20; 
         let new_wall = new Wall(this, this.maxSpeed)
@@ -37,6 +45,10 @@ class Play extends Phaser.Scene{
     //add in collison checker
 
     collideWall(){
-        
+        console.log('hit')
+        this.player.anims.play('wall-hit')
+        this.switch = this.time.delayedCall(1000, () =>{
+            this.scene.start('gameOverScene')
+        })
     }
 }

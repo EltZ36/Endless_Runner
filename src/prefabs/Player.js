@@ -22,5 +22,17 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         if(keyDOWN.isDown){
             this.body.velocity.y += 20
         }
+        if(keyONE.isDown){
+            this.setTexture('player')
+        }
+        if(keyTWO.isDown){
+            this.setTexture('player_circle')
+        }
+        if(keyTHREE.isDown){
+            this.setTexture('player_square')
+        }
+        if(keyFOUR.isDown){
+            this.setTexture('player_triangle')
+        }
     }
 }

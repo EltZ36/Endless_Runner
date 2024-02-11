@@ -10,6 +10,10 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         this.currentScene.physics.add.existing(this)
         this.setVelocityX(speed)
         this.setImmovable()
+        this.triangle = false
+        this.circle = false 
+        this.square = false 
+        this.default = true
     }
 
     update(){
@@ -21,6 +25,26 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         //make sure the max speed doesn't reach like 200 
         if(this.x < -this.width){
             this.destroy()
+        }
+    }
+
+    getShape(){
+        let result = ""
+        switch(this.default == true || this.default == false){
+            case(this.default == true): 
+                result = "default"
+                return result; 
+            case(this.square == true): 
+                result = "square"
+                return result; 
+            case(this.triangle == true): 
+                result = "triangle"
+                return result;
+            case(this.circle == true):
+                result = "circle"
+                return result;
+            default:
+                return result; 
         }
     }
 }

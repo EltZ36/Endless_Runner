@@ -10,14 +10,20 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         this.currentScene.physics.add.existing(this)
         this.setVelocityX(speed)
         this.setImmovable()
+        this.octagon = false 
         this.triangle = false
-        this.circle = false 
+        this.circle = false
         this.square = false 
-        this.default = true
+        this.default = true 
     }
 
     update(){
-        if(this.isNew && this.x < (game.config.width/2)){
+        if(this.x < -this.width){
+            this.x = 810
+            this.y = Phaser.Math.Between(70, 570)
+            this.setRandom()
+        }
+        /*if(this.isNew && this.x < (game.config.width/2)){
             this.currentScene.addWall(this.parent, this.speed)
             this.isNew = false
         }
@@ -25,7 +31,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         //make sure the max speed doesn't reach like 200 
         if(this.x < -this.width){
             this.destroy()
-        }
+        }*/
     }
 
     getShape(){
@@ -43,8 +49,61 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
             case(this.circle == true):
                 result = "circle"
                 return result;
+            case(this.octagon == true):
+                result = "octagon"
+                return result; 
             default:
                 return result; 
+        }
+    }
+
+    setRandom(){
+        let random = 4
+        //Phaser.Math.Between(0, 4)
+        switch(random){
+            case 0:
+                this.octagon = false 
+                this.triangle = false
+                this.circle = false
+                this.square = false
+                this.default = true 
+                this.setTexture('wall_blank') 
+                break;
+            case 1:
+                this.octagon = false 
+                this.triangle = false
+                this.circle = false
+                this.square = true 
+                this.default = false
+                this.setTexture('wall_square') 
+                break;
+            case 2:
+                this.octagon = false 
+                this.triangle = true
+                this.circle = false
+                this.square = false 
+                this.default = false
+                this.setTexture('wall_triangle')
+                break;
+            case 3:
+                this.octagon = false 
+                this.triangle = false
+                this.circle = true
+                this.square = false 
+                this.default = false
+                this.setTexture('wall_circle')
+                break;
+            case 4:
+                this.octagon = true 
+                this.triangle = false
+                this.circle = false
+                this.square = false 
+                this.default = false
+                this.setTexture('wall_octagon')
+                break;
+            default:
+                console.log('error, cannot set random')
+                break;
         }
     }
 }

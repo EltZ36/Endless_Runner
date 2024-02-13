@@ -4,6 +4,8 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+        //tile sprite 
+        this.background = this.add.tileSprite(0, 0, 800, 640, 'background').setOrigin(0,0)
         this.maxSpeed = -500
         this.player = new Player(this, 200)
         //maybe have to add in random code in here or a state machine instead

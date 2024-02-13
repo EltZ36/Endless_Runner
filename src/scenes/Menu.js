@@ -5,6 +5,7 @@ class Menu extends Phaser.Scene{
 
     preload(){
         //preloading in the wall states
+        this.load.image('background', './assets/img/background.png')
         this.load.image('wall_triangle', './assets/img/wall_triangle.png')
         this.load.image('wall_circle', './assets/img/wall_circle.png')
         this.load.image('wall_square', './assets/img/wall_square.png')

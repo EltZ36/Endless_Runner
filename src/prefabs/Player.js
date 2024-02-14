@@ -28,6 +28,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.circle = false 
             this.square = false 
             this.default = true
+            this.scene.sound.play('default_switch')
         }
         if(keyTWO.isDown){
             this.setTexture('player_states', 'player04.png')
@@ -35,6 +36,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.circle = true 
             this.square = false 
             this.default = false
+            this.scene.sound.play('circle_switch')
         }
         if(keyTHREE.isDown){
             this.setTexture('player_states', 'player05.png')
@@ -42,6 +44,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.circle = false 
             this.square = true 
             this.default = false
+            this.scene.sound.play('square_switch')
         }
         if(keyFOUR.isDown){
             this.setTexture('player_states', 'player06.png')
@@ -49,11 +52,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.circle = false 
             this.square = false 
             this.default = false
+            this.scene.sound.play('triangle_switch')
         }
-        //a bit messy but its the only way I could think of in order to get the animation to play while you are hit 
-        /*if(this.scene.gameOver == true){
-            this.anims.play('wall-hit')
-        }*/
     }
 
     getShape(){

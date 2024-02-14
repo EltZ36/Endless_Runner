@@ -2,12 +2,12 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, speed){
         //max btwn 570 and 70
         super(scene, 810, Phaser.Math.Between(100, 560), 'wall_blank')
-        this.currentScene = scene
+        this.scene = scene
         this.speed = speed
         this.bounce = false
         this.isNew = true; 
-        this.currentScene.add.existing(this)
-        this.currentScene.physics.add.existing(this)
+        this.scene.add.existing(this)
+        this.scene.physics.add.existing(this)
         this.setVelocityX(this.speed)
         this.setImmovable()
         this.octagon = false 
@@ -22,7 +22,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     update(){
         if(this.x < -this.width){
             this.x = 810
-            this.y = Phaser.Math.Between(70, 570)
+            this.y = Phaser.Math.Between(100, 560)
             this.setRandom()
         }
         /*if(this.isNew && this.x < (game.config.width/2)){
@@ -62,7 +62,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     setRandom(){
         var random
         //let random = 2
-        if(this.currentScene.first_level_bump == true){
+        if(this.scene.first_level_bump == true){
             random = Phaser.Math.Between(0, 4)
         }
         else{

@@ -73,6 +73,7 @@ class Play extends Phaser.Scene{
             this.player.setVelocity(0)
             this.current_wall.setVelocityX(20)
             this.current_wall.setVelocityY(0)
+            this.sound.play('explosion', {volume: 0.5})
             this.clock = this.time.delayedCall(600, () =>{
                 this.current_wall.setVelocityX(0)
             })
@@ -82,6 +83,7 @@ class Play extends Phaser.Scene{
         }
         else{
             this.points += 10
+            this.sound.play('earn_pt', {volume: 0.5})
         }
     }
 
@@ -92,12 +94,12 @@ class Play extends Phaser.Scene{
             this.first_level_bump = true 
             this.maxSpeed -= 20
             this.current_wall.setVelocityX(this.maxSpeed)
-            this.background.tilePositionX += 3
+            this.background.tilePositionX += 8
         }
         else if(this.level == 0 && this.first_level_bump == true && this.second_level_bump == false){
             this.maxSpeed -= 30
             this.current_wall.setVelocityX(this.maxSpeed)
-            this.background.tilePositionX += 5
+            this.background.tilePositionX += 15
             this.second_level_bump = true 
         }
         else if(this.level == 0 && this.second_level_bump == true){
@@ -105,7 +107,7 @@ class Play extends Phaser.Scene{
             this.ySpeed -= 10
             this.current_wall.setVelocityY(this.ySpeed)
             this.current_wall.setVelocity(this.maxSpeed)
-            this.background.tilePositionX += 8
+            this.background.tilePositionX += 20
         }
     }
 }

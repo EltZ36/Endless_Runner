@@ -1,3 +1,6 @@
+//Elton Zeng
+//Hours committed: 20-30 hours
+//Sources: used snippets of code from paddle parkour including lines 
 //have a config object beforehand to get the settings we want 
 let config = {
     type: Phaser.AUTO, 

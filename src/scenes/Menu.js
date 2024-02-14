@@ -18,7 +18,7 @@ class Menu extends Phaser.Scene{
         this.load.audio('default_switch','./assets/audio/default_switch.wav')
         this.load.audio('square_switch', './assets/audio/square_switch.wav')
         this.load.audio('triangle_switch','./assets/audio/triangle_switch.wav')
-        //bgm credit: Music by <a href="https://pixabay.com/users/music_for_videos-26992513/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=148496">Oleg Kyrylkovv</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=148496">Pixabay</a>
+        //bgm credit: Music by <a href="https://pixabay.com/users/stereocode-31360109/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=183269">Yevhenii Kovalenko</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=183269">Pixabay</a>
         //thinking time: music for videos
         this.load.audio('bgm', './assets/audio/background_music.mp3')
         this.load.audio('earn_pt', './assets/audio/pickupCoin.wav')

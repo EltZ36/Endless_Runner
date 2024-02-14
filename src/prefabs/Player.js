@@ -22,37 +22,37 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         if(keyDOWN.isDown){
             this.body.velocity.y += 20
         }
-        if(keyONE.isDown){
+        if(keyONE.isDown && this.default != true){
             this.setTexture('player_states', 'player00.png')
             this.triangle = false
             this.circle = false 
             this.square = false 
             this.default = true
-            this.scene.sound.play('default_switch')
+            this.scene.sound.play('default_switch', {volume: 0.5})
         }
-        if(keyTWO.isDown){
+        if(keyTWO.isDown && this.circle != true){
             this.setTexture('player_states', 'player04.png')
             this.triangle = false
             this.circle = true 
             this.square = false 
             this.default = false
-            this.scene.sound.play('circle_switch')
+            this.scene.sound.play('circle_switch', {volume: 0.5})
         }
-        if(keyTHREE.isDown){
+        if(keyTHREE.isDown && this.square != true){
             this.setTexture('player_states', 'player05.png')
             this.triangle = false
             this.circle = false 
             this.square = true 
             this.default = false
-            this.scene.sound.play('square_switch')
+            this.scene.sound.play('square_switch', {volume: 0.5})
         }
-        if(keyFOUR.isDown){
+        if(keyFOUR.isDown  && this.triangle != true){
             this.setTexture('player_states', 'player06.png')
             this.triangle = true 
             this.circle = false 
             this.square = false 
             this.default = false
-            this.scene.sound.play('triangle_switch')
+            this.scene.sound.play('triangle_switch', {volume: 0.5})
         }
     }
 

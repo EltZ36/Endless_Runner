@@ -20,4 +20,7 @@ let keySPACE, keyUP, keyDOWN, keyONE, keyTWO, keyTHREE, keyFOUR, keyRESET, keyME
 //set UI sizes
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
+let highScore
+let points 
+let newHighScore = false
 

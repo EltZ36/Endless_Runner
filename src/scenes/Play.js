@@ -39,12 +39,20 @@ class Play extends Phaser.Scene{
         this.seconds = 0
         this.first_level_bump = false 
         this.second_level_bump = false 
-        this.points = 0
+        points = 0
         this.ySpeed = 0
-        this.level_timer = this.time.addEvent({delay: 10000, 
+        this.level_timer = this.time.addEvent({delay: 2000, 
             callback: this.increaseLevel,
             callbackScope: this,
             loop: true})
+        //snippet from paddle parkour 
+        this.bgm = this.sound.add('bgm', {
+            mute: false,
+            volume: 3,
+            rate: 1,
+            loop: true
+        })
+        this.bgm.play()
     }
 
     update(){ 
@@ -73,16 +81,16 @@ class Play extends Phaser.Scene{
             this.player.setVelocity(0)
             this.current_wall.setVelocityX(20)
             this.current_wall.setVelocityY(0)
-            this.sound.play('explosion', {volume: 0.5})
             this.clock = this.time.delayedCall(600, () =>{
                 this.current_wall.setVelocityX(0)
             })
-            this.switch = this.time.delayedCall(1600, () =>{
+            this.switch = this.time.delayedCall(1280, () =>{
                 this.scene.start('gameOverScene')
+                this.sound.play('explosion', {volume: 0.5})
             })
         }
         else{
-            this.points += 10
+            points += 10
             this.sound.play('earn_pt', {volume: 0.5})
         }
     }
@@ -95,12 +103,14 @@ class Play extends Phaser.Scene{
             this.maxSpeed -= 20
             this.current_wall.setVelocityX(this.maxSpeed)
             this.background.tilePositionX += 8
+            this.sound.play("level_change", {volume: 0.5})
         }
         else if(this.level == 0 && this.first_level_bump == true && this.second_level_bump == false){
             this.maxSpeed -= 30
             this.current_wall.setVelocityX(this.maxSpeed)
             this.background.tilePositionX += 15
             this.second_level_bump = true 
+            this.sound.play("level_change", {volume: 0.5})
         }
         else if(this.level == 0 && this.second_level_bump == true){
             this.maxSpeed -= 50
@@ -108,6 +118,7 @@ class Play extends Phaser.Scene{
             this.current_wall.setVelocityY(this.ySpeed)
             this.current_wall.setVelocity(this.maxSpeed)
             this.background.tilePositionX += 20
+            this.sound.play("level_change", {volume: 0.5})
         }
     }
 }

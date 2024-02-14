@@ -1,12 +1,12 @@
 class Player extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, speed){
         super(scene, 60, 250, 'player')
+        this.scene = scene 
         scene.add.existing(this)
         scene.physics.add.existing(this)
         this.setImmovable()
         this.setCollideWorldBounds(true);
         this.speed = speed
-        this.hit = false
         this.triangle = false
         this.circle = false 
         this.square = false 
@@ -50,6 +50,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.square = false 
             this.default = false
         }
+        //a bit messy but its the only way I could think of in order to get the animation to play while you are hit 
+        /*if(this.scene.gameOver == true){
+            this.anims.play('wall-hit')
+        }*/
     }
 
     getShape(){

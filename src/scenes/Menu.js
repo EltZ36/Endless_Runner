@@ -25,6 +25,11 @@ class Menu extends Phaser.Scene{
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Working Title for Endless Ranner', {fontSize: 24}).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press SPACE TO START').setOrigin(0.5)
+        this.anims.create({
+            key: 'wall-hit',
+            frames: this.anims.generateFrameNumbers('player', {start: 0, end: 3}),
+            frameRate: 30,
+        })
     }
 
     update(){

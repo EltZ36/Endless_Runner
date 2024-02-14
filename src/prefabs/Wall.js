@@ -58,8 +58,8 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     }
 
     setRandom(){
-        let random = 4
-        //Phaser.Math.Between(0, 4)
+        //let random = Phaser.Math.Between(0, 4)
+        let random = 2
         switch(random){
             case 0:
                 this.octagon = false 

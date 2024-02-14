@@ -4,7 +4,8 @@ class Play extends Phaser.Scene{
     }
 
     create(){
-        //tile sprite 
+        //tile sprite
+        this.physics.world.setBounds(0,30, 0, 570, false, false, true, true)
         this.background = this.add.tileSprite(0, 0, 800, 640, 'background').setOrigin(0,0)
         this.maxSpeed = -500
         this.player = new Player(this, 200)
@@ -20,12 +21,6 @@ class Play extends Phaser.Scene{
         keyTWO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO)
         keyTHREE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE)
         keyFOUR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR)
-        this.anims.create({
-            key: 'wall-hit',
-            frameRate: 4,
-            repeat: -1, 
-            frames: this.anims.generateFrameNumbers('player', {start: 0, end: 3})
-        })
         /*this.physics.add.collider(
             this.player,
             this.wallGroup,
@@ -40,12 +35,16 @@ class Play extends Phaser.Scene{
             null,
             this 
         )
+        this.gameOver = true 
     }
 
     update(){ 
-        this.player.update()
-        this.current_wall.update()
-        //console.log(this.current_wall.getShape())
+        //scrolling background
+        this.background.tilePositionX += 2
+        if(this.gameOver != false){
+            this.player.update()
+            this.current_wall.update()
+        }
     }
 
     //could do this in wall.update() instead for the boom animation
@@ -60,11 +59,16 @@ class Play extends Phaser.Scene{
 
     collideWall(){
         if((this.current_wall.getShape() != "octagon") && ((this.current_wall.getShape() != this.player.getShape())  ||  (this.current_wall.getShape() == "default" && this.player.getShape() == "default"))){
+            this.gameOver = false 
             this.player.anims.play('wall-hit')
-            this.switch = this.time.delayedCall(1000, () =>{
+            this.player.setVelocity(0)
+            this.current_wall.setVelocityX(20)
+            this.clock = this.time.delayedCall(600, () =>{
+                this.current_wall.setVelocityX(0)
+            })
+            this.switch = this.time.delayedCall(1600, () =>{
                 this.scene.start('gameOverScene')
             })
-            console.log(this.current_wall.getShape())
         }
     }
 }

@@ -1,7 +1,7 @@
 class Wall extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, speed){
         //max btwn 570 and 70
-        super(scene, 810, Phaser.Math.Between(70, 570), 'wall_blank')
+        super(scene, 810, Phaser.Math.Between(100, 560), 'wall_blank')
         this.currentScene = scene
         this.speed = speed
         this.bounce = false
@@ -15,6 +15,8 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         this.circle = false
         this.square = false 
         this.default = true 
+        this.setBounce(0.5)
+        this.setCollideWorldBounds(true)
     }
 
     update(){

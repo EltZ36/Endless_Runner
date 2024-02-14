@@ -1,6 +1,6 @@
 class Player extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, speed){
-        super(scene, 60, 250, 'player')
+        super(scene, 60, 250, 'player_states', 'player00.png')
         this.scene = scene 
         scene.add.existing(this)
         scene.physics.add.existing(this)
@@ -23,28 +23,28 @@ class Player extends Phaser.Physics.Arcade.Sprite{
             this.body.velocity.y += 20
         }
         if(keyONE.isDown){
-            this.setTexture('player')
+            this.setTexture('player_states', 'player00.png')
             this.triangle = false
             this.circle = false 
             this.square = false 
             this.default = true
         }
         if(keyTWO.isDown){
-            this.setTexture('player_circle')
+            this.setTexture('player_states', 'player04.png')
             this.triangle = false
             this.circle = true 
             this.square = false 
             this.default = false
         }
         if(keyTHREE.isDown){
-            this.setTexture('player_square')
+            this.setTexture('player_states', 'player05.png')
             this.triangle = false
             this.circle = false 
             this.square = true 
             this.default = false
         }
         if(keyFOUR.isDown){
-            this.setTexture('player_triangle')
+            this.setTexture('player_states', 'player06.png')
             this.triangle = true 
             this.circle = false 
             this.square = false 

@@ -38,6 +38,13 @@ class Play extends Phaser.Scene{
         this.gameOver = true 
         this.seconds = 0
         this.first_level_bump = false 
+        this.second_level_bump = false 
+        this.points = 0
+        this.ySpeed = 0
+        this.level_timer = this.time.addEvent({delay: 10000, 
+            callback: this.increaseLevel,
+            callbackScope: this,
+            loop: true})
     }
 
     update(){ 
@@ -46,7 +53,6 @@ class Play extends Phaser.Scene{
         if(this.gameOver != false){
             this.player.update()
             this.current_wall.update()
-            this.increaseLevel()
         }
     }
 
@@ -66,6 +72,7 @@ class Play extends Phaser.Scene{
             this.player.anims.play('wall-hit')
             this.player.setVelocity(0)
             this.current_wall.setVelocityX(20)
+            this.current_wall.setVelocityY(0)
             this.clock = this.time.delayedCall(600, () =>{
                 this.current_wall.setVelocityX(0)
             })
@@ -73,21 +80,32 @@ class Play extends Phaser.Scene{
                 this.scene.start('gameOverScene')
             })
         }
+        else{
+            this.points += 10
+        }
     }
 
     increaseLevel(){
         this.seconds += 1
-        this.level = this.seconds % 100
-        if(this.level == 0 && this.first_level_bump == false){
+        this.level = this.seconds % 10
+        if(this.level == 0 && this.first_level_bump == false && this.second_level_bump == false){
             this.first_level_bump = true 
-            this.maxSpeed -= 50
+            this.maxSpeed -= 20
             this.current_wall.setVelocityX(this.maxSpeed)
             this.background.tilePositionX += 3
         }
-        else if(this.level == 0 && this.first_level_bump == true){
-            this.maxSpeed -= 80
+        else if(this.level == 0 && this.first_level_bump == true && this.second_level_bump == false){
+            this.maxSpeed -= 30
             this.current_wall.setVelocityX(this.maxSpeed)
             this.background.tilePositionX += 5
+            this.second_level_bump = true 
+        }
+        else if(this.level == 0 && this.second_level_bump == true){
+            this.maxSpeed -= 50
+            this.ySpeed -= 10
+            this.current_wall.setVelocityY(this.ySpeed)
+            this.current_wall.setVelocity(this.maxSpeed)
+            this.background.tilePositionX += 8
         }
     }
 }

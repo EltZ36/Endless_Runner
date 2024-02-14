@@ -36,6 +36,8 @@ class Play extends Phaser.Scene{
             this 
         )
         this.gameOver = true 
+        this.seconds = 0
+        this.first_level_bump = false 
     }
 
     update(){ 
@@ -44,6 +46,7 @@ class Play extends Phaser.Scene{
         if(this.gameOver != false){
             this.player.update()
             this.current_wall.update()
+            this.increaseLevel()
         }
     }
 
@@ -69,6 +72,22 @@ class Play extends Phaser.Scene{
             this.switch = this.time.delayedCall(1600, () =>{
                 this.scene.start('gameOverScene')
             })
+        }
+    }
+
+    increaseLevel(){
+        this.seconds += 1
+        this.level = this.seconds % 100
+        if(this.level == 0 && this.first_level_bump == false){
+            this.first_level_bump = true 
+            this.maxSpeed -= 50
+            this.current_wall.setVelocityX(this.maxSpeed)
+            this.background.tilePositionX += 3
+        }
+        else if(this.level == 0 && this.first_level_bump == true){
+            this.maxSpeed -= 80
+            this.current_wall.setVelocityX(this.maxSpeed)
+            this.background.tilePositionX += 5
         }
     }
 }

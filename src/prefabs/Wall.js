@@ -8,7 +8,7 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
         this.isNew = true; 
         this.currentScene.add.existing(this)
         this.currentScene.physics.add.existing(this)
-        this.setVelocityX(speed)
+        this.setVelocityX(this.speed)
         this.setImmovable()
         this.octagon = false 
         this.triangle = false
@@ -58,8 +58,14 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     }
 
     setRandom(){
-        //let random = Phaser.Math.Between(0, 4)
-        let random = 2
+        var random
+        //let random = 2
+        if(this.currentScene.first_level_bump == true){
+            random = Phaser.Math.Between(0, 4)
+        }
+        else{
+            random = Phaser.Math.Between(0, 3)
+        }
         switch(random){
             case 0:
                 this.octagon = false 

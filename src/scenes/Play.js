@@ -89,9 +89,18 @@ class Play extends Phaser.Scene{
                 this.sound.play('explosion', {volume: 0.5})
             })
         }
+        if((this.current_wall.getShape() == "octagon")){
+            points -= 5
+            this.sound.play('lose_pt', {volume: 0.5})
+            //add dissappearing text 
+            if(points < 0){
+                points = 0
+            }
+        }
         else{
             points += 10
             this.sound.play('earn_pt', {volume: 0.5})
+            //add dissappearing text 
         }
     }
 

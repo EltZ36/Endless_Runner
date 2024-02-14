@@ -60,14 +60,14 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     }
 
     setRandom(){
-        var random
-        //let random = 2
-        if(this.scene.first_level_bump == true){
+        //var random
+        let random = 4
+        /*if(this.scene.first_level_bump == true){
             random = Phaser.Math.Between(0, 4)
         }
         else{
             random = Phaser.Math.Between(0, 3)
-        }
+        }*/
         switch(random){
             case 0:
                 this.octagon = false 

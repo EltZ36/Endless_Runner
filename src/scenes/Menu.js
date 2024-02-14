@@ -21,6 +21,7 @@ class Menu extends Phaser.Scene{
         //bgm credit: Music by <a href="https://pixabay.com/users/stereocode-31360109/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=183269">Yevhenii Kovalenko</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=183269">Pixabay</a>
         //thinking time: music for videos
         this.load.audio('bgm', './assets/audio/background_music.mp3')
+        this.load.audio('lose_pt', './assets/audio/points_lost.wav')
         this.load.audio('earn_pt', './assets/audio/pickupCoin.wav')
         this.load.audio('explosion', './assets/audio/explosion.wav')
         this.load.audio('level_change', './assets/audio/level_change.wav')

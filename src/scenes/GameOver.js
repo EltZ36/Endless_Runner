@@ -36,6 +36,10 @@ class GameOver extends Phaser.Scene{
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize - 50, `Your Highest Score: ${highScore}`, {fontSize: 20}).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, `Your Score: ${points}`, {fontSize: 20}).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 40, 'Press R to play again or Press M to go back to the menu', {fontSize: 18}).setOrigin(0.5)
+
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 240, 'Credits:').setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 270, 'BGM is "Sci-fi Ambient Music" by Yevhenii Kovalenko on PixaBay').setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 290, 'Sound effects created on jfsxr').setOrigin(0.5)
     }
 
     update(){

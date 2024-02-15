@@ -10,24 +10,14 @@ class Play extends Phaser.Scene{
         this.maxSpeed = -500
         this.player = new Player(this, 200)
         //maybe have to add in random code in here or a state machine instead
-        this.current_wall = new Wall(this, this.maxSpeed)
-        /*this.wallGroup = this.add.group({
-            runChildUpdate: true
-        })
-        this.addWall()*/
+        this.current_wall = new Wall(this, 810, Phaser.Math.Between(100, 280), 100, 280, this.maxSpeed)
+        this.second_wall = new Wall(this, 810, Phaser.Math.Between(420, 560), 420, 560, this.maxSpeed)
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP)
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN) 
         keyONE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE)
         keyTWO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO)
         keyTHREE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE)
         keyFOUR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR)
-        /*this.physics.add.collider(
-            this.player,
-            this.wallGroup,
-            this.collideWall,
-            null,
-            this,
-        )*/ 
         this.collide = this.physics.add.collider(
             this.player,
             this.current_wall,
@@ -35,11 +25,18 @@ class Play extends Phaser.Scene{
             null,
             this 
         )
+        this.collide2 = this.physics.add.collider(
+            this.player, 
+            this.second_wall,
+            this.collideWall,
+            null,
+            this 
+        )
         //this.collide.overlapOnly()
         this.gameOver = true 
         this.seconds = 0
-        this.first_level_bump = false 
-        this.second_level_bump = false 
+        this.first_level_bump = false
+        this.second_level_bump = false  
         points = 0
         this.ySpeed = 0
         this.level_timer = this.time.addEvent({delay: 2000, 
@@ -58,49 +55,43 @@ class Play extends Phaser.Scene{
 
     update(){ 
         //scrolling background
-        this.background.tilePositionX += 2
+        this.background.tilePositionX += 5
         if(this.gameOver != false){
             this.player.update()
             this.current_wall.update()
+            if(this.second_level_bump == true){
+                this.second_wall.update()
+            }
         }
     }
 
-    //could do this in wall.update() instead for the boom animation
-    //add in collison checker
-    addWall(){
-        //let speed = 20; 
-        let new_wall = new Wall(this, this.maxSpeed)
-        new_wall.setRandom()
-        this.wallGroup.add(new_wall)
-        //wallGroup.add(new_wall)
-    }
-
-    collideWall(){
-        if((this.current_wall.getShape() != "octagon") && ((this.current_wall.getShape() != this.player.getShape())  ||  (this.current_wall.getShape() == "default" && this.player.getShape() == "default"))){
+    collideWall(player, wall){
+        if((wall.getShape() != "octagon") && ((wall.getShape() != player.getShape())  ||  (wall.getShape() == "default" && player.getShape() == "default"))){
             this.gameOver = false 
-            this.player.anims.play('wall-hit')
-            this.player.setVelocity(0)
-            this.current_wall.setVelocityX(20)
-            this.current_wall.setVelocityY(0)
+            player.anims.play('wall-hit')
+            player.setVelocity(0)
+            wall.setVelocityX(20)
+            wall.setVelocityY(0)
             this.clock = this.time.delayedCall(600, () =>{
-                this.current_wall.setVelocityX(0)
+                wall.setVelocityX(0)
             })
             this.switch = this.time.delayedCall(1280, () =>{
                 this.scene.start('gameOverScene')
                 this.sound.play('explosion', {volume: 0.5})
             })
         }
-        if((this.current_wall.getShape() == "octagon")){
+        if((wall.getShape() == "octagon")){
             points -= 5
-            this.point_gain(0)
+            this.point_gain(0, wall)
             if(points < 0){
                 points = 0
             }
         }
-        if((this.current_wall.getShape() == this.player.getShape()) && (this.current_wall.getShape() != "octagon") && (this.current_wall.getShape() != "default" && this.player.getShape() != "default")){
+        if( (wall.getShape() != "octagon") && (wall.getShape() == player.getShape()) && (wall.getShape() != "default" && player.getShape() != "default")){
             points += 10
             //add dissappearing text 
-            this.point_gain(1)
+            this.point_gain(1, wall)
+            console.log(player.getShape())
         }
     }
 
@@ -111,29 +102,31 @@ class Play extends Phaser.Scene{
             this.first_level_bump = true 
             this.maxSpeed -= 20
             this.current_wall.setVelocityX(this.maxSpeed)
-            this.background.tilePositionX += 8
+            this.second_wall.setVelocityX(this.maxSpeed)
             this.sound.play("level_change", {volume: 0.5})
         }
         else if(this.level == 0 && this.first_level_bump == true && this.second_level_bump == false){
             this.maxSpeed -= 30
             this.current_wall.setVelocityX(this.maxSpeed)
-            this.background.tilePositionX += 15
+            this.second_wall.setVelocityX(this.maxSpeed)
+            this.first_level_bump = false 
             this.second_level_bump = true 
             this.sound.play("level_change", {volume: 0.5})
         }
         else if(this.level == 0 && this.second_level_bump == true){
-            this.maxSpeed -= 50
+            this.maxSpeed -= 80
             this.ySpeed -= 10
             this.current_wall.setVelocityY(this.ySpeed)
-            this.current_wall.setVelocity(this.maxSpeed)
-            this.background.tilePositionX += 20
+            this.current_wall.setVelocityX(this.maxSpeed)
+            this.second_wall.setVelocityY(this.ySpeed)
+            this.second_wall.setVelocityX(this.maxSpeed)
             this.sound.play("level_change", {volume: 0.5})
         }
     }
 
-    point_gain(type){
-        let current_wall_x_position = this.current_wall.x
-        let current_wall_y_position = this.current_wall.y
+    point_gain(type, wall){
+        let current_wall_x_position = wall.x
+        let current_wall_y_position = wall.y
         var pts;
         if(type == 0){
             pts = this.add.text(current_wall_x_position + 60, current_wall_y_position, '-5')
@@ -150,7 +143,12 @@ class Play extends Phaser.Scene{
                 pts.destroy()
             }
         })
-        this.current_wall.setX(810)
-        this.current_wall.setY(Phaser.Math.Between(100, 560))
+        wall.setX(810)
+        if(this.second_level_bump != true){
+            wall.setY(Phaser.Math.Between(this.min_y, this.max_y))
+        }
+        else{
+            wall.setY(Phaser.Math.Between(wall.min_y, wall.max_y))
+        }
     }
 }

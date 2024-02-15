@@ -1,8 +1,11 @@
 class Wall extends Phaser.Physics.Arcade.Sprite{
-    constructor(scene, speed){
+    constructor(scene, x, y, min_y, max_y, speed){
         //max btwn 570 and 70
-        //super(scene, 810, Phaser.Math.Between(100, 560), 'wall_blank')
-        super(scene, 810, 250, 'wall_blank')
+        super(scene, x, y, 'wall_blank')
+        this.x = x 
+        this.y = y
+        this.min_y = min_y
+        this.max_y = max_y
         this.scene = scene
         this.speed = speed
         this.bounce = false
@@ -23,18 +26,14 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     update(){
         if(this.x < -this.width){
             this.x = 810
-            this.y = Phaser.Math.Between(100, 560)
+            if(this.scene.second_level_bump == false){
+                this.y = Phaser.Math.Between(100, 560)
+            }
+            else{
+                this.y = Phaser.Math.Between(this.min_y, this.max_y)
+            }
             this.setRandom()
         }
-        /*if(this.isNew && this.x < (game.config.width/2)){
-            this.currentScene.addWall(this.parent, this.speed)
-            this.isNew = false
-        }
-        //if this.level == 50, increase the speed 
-        //make sure the max speed doesn't reach like 200 
-        if(this.x < -this.width){
-            this.destroy()
-        }*/
     }
 
     getShape(){
@@ -61,14 +60,14 @@ class Wall extends Phaser.Physics.Arcade.Sprite{
     }
 
     setRandom(){
-        //var random
-        let random = 4
-        /*if(this.scene.first_level_bump == true){
+        var random
+        //let random = 4
+        if(this.scene.first_level_bump == true){
             random = Phaser.Math.Between(0, 4)
         }
         else{
             random = Phaser.Math.Between(0, 3)
-        }*/
+        }
         switch(random){
             case 0:
                 this.octagon = false 

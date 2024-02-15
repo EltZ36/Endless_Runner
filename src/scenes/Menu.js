@@ -29,10 +29,14 @@ class Menu extends Phaser.Scene{
 
     create(){
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Working Title for Endless Ranner', {fontSize: 24}).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize, 'Press 1, 2, 3, 4 to switch shapes and match the shape on the wall. Blank walls cannot be matched.', {fontSize: 12}).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 50, 'Press Space to Start').setOrigin(0.5)
-        //code gotten at from 00:00 to 2:18 at https://www.youtube.com/watch?v=9sWrGohw9qo by youtuber jest array 
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - 50, 'Hole of the Space', {fontSize: 40}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding, 'Match the symbols of the wall with your ship').setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 30, '1 = default and cannot match with any other shape', {fontSize: 13}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 60, '2 = circle', {fontSize: 13}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 90, '3 = square', {fontSize: 13}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 120, '4 = triangle', {fontSize: 13}).setOrigin(0.5)
+        let start = this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 170, 'Press Space to Start', {fontSize: 25}).setOrigin(0.5)
+        start.setColor('Yellow')
         this.anims.create({
             key: "wall-hit",
             frameRate: 5,

@@ -10,7 +10,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.triangle = false
         this.circle = false 
         this.square = false 
-        this.default = false
+        this.default = true 
         this.setDragY(80)
         this.setBounce(0.1) 
     }

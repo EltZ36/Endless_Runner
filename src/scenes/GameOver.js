@@ -33,8 +33,9 @@ class GameOver extends Phaser.Scene{
         if(newHighScore){
             this.add.text(game.config.width/2, game.config.height/2 + borderUISize - 20, `New High Score!`, {fontSize: 20}).setOrigin(0.5)
         }
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize - 50, `Your High Score: ${highScore}`, {fontSize: 20}).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 20, 'Press R to play again or Press M to go back to the menu', {fontSize: 18}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize - 50, `Your Highest Score: ${highScore}`, {fontSize: 20}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, `Your Score: ${points}`, {fontSize: 20}).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding + 40, 'Press R to play again or Press M to go back to the menu', {fontSize: 18}).setOrigin(0.5)
     }
 
     update(){

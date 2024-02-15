@@ -28,13 +28,14 @@ class Play extends Phaser.Scene{
             null,
             this,
         )*/ 
-        this.physics.add.collider(
+        this.collide = this.physics.add.collider(
             this.player,
             this.current_wall,
             this.collideWall,
             null,
             this 
         )
+        //this.collide.overlapOnly()
         this.gameOver = true 
         this.seconds = 0
         this.first_level_bump = false 
@@ -91,16 +92,15 @@ class Play extends Phaser.Scene{
         }
         if((this.current_wall.getShape() == "octagon")){
             points -= 5
-            this.sound.play('lose_pt', {volume: 0.5})
-            //add dissappearing text 
+            this.point_gain(0)
             if(points < 0){
                 points = 0
             }
         }
-        else{
+        if((this.current_wall.getShape() == this.player.getShape()) && (this.current_wall.getShape() != "octagon") && (this.current_wall.getShape() != "default" && this.player.getShape() != "default")){
             points += 10
-            this.sound.play('earn_pt', {volume: 0.5})
             //add dissappearing text 
+            this.point_gain(1)
         }
     }
 
@@ -129,5 +129,28 @@ class Play extends Phaser.Scene{
             this.background.tilePositionX += 20
             this.sound.play("level_change", {volume: 0.5})
         }
+    }
+
+    point_gain(type){
+        let current_wall_x_position = this.current_wall.x
+        let current_wall_y_position = this.current_wall.y
+        var pts;
+        if(type == 0){
+            pts = this.add.text(current_wall_x_position + 60, current_wall_y_position, '-5')
+            this.sound.play('lose_pt', {volume: 0.5})
+        }
+        if(type != 0){
+            pts = this.add.text(current_wall_x_position + 60, current_wall_y_position, '+10')
+            this.sound.play('earn_pt', {volume: 0.5})
+        }
+        this.dissappear = this.tweens.add({
+            targets: [pts],
+            duration: 10000,
+            onComplete: function(){
+                pts.destroy()
+            }
+        })
+        this.current_wall.setX(810)
+        this.current_wall.setY(Phaser.Math.Between(100, 560))
     }
 }

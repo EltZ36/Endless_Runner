@@ -10,6 +10,8 @@ I also thought that being able to run the symbol matching without a state machin
 For an endless runner, I never see any type of pattern matching especially the ones discussed in class so I decided to make a game around that. I also thought the idea of having holes in the walls reminded me of this show that I watched as a kid called "Hole in the Wall" and I thought it was something to think about.
 I am also proud of being able to draw different ships based on ships and try to see what patterns I can do on the ships and I think it's something I could have explored more of with this game. 
 */
+//bugs:
+//currently, there is a bug with the score in which when I interact with the wall and just stand as opposed to just moving, it causes there to be extra points added. I can't solve the issue currently.
 let config = {
     type: Phaser.AUTO, 
     width: 800, 

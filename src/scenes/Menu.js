@@ -37,6 +37,7 @@ class Menu extends Phaser.Scene{
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 120, '4 = triangle', {fontSize: 13}).setOrigin(0.5)
         let start = this.add.text(game.config.width/2, game.config.height/2 - borderUISize + borderPadding + 170, 'Press Space to Start', {fontSize: 25}).setOrigin(0.5)
         start.setColor('Yellow')
+        //from texture atals 
         this.anims.create({
             key: "wall-hit",
             frameRate: 5,

@@ -75,11 +75,13 @@ class Play extends Phaser.Scene{
             this.clock = this.time.delayedCall(600, () =>{
                 wall.setVelocityX(0)
             })
+            //play sound after the ship breaks 
             this.switch = this.time.delayedCall(1280, () =>{
                 this.scene.start('gameOverScene')
                 this.sound.play('explosion', {volume: 0.5})
             })
         }
+        //decrement points if its an octagon
         if((wall.getShape() == "octagon")){
             points -= 5
             this.point_gain(0, wall)
@@ -87,11 +89,11 @@ class Play extends Phaser.Scene{
                 points = 0
             }
         }
+        //increment points if its the correct shape
         if( (wall.getShape() != "octagon") && (wall.getShape() == player.getShape()) && (wall.getShape() != "default" && player.getShape() != "default")){
             points += 10
             //add dissappearing text 
             this.point_gain(1, wall)
-            console.log(player.getShape())
         }
     }
 
@@ -145,7 +147,7 @@ class Play extends Phaser.Scene{
         })
         wall.setX(810)
         if(this.second_level_bump != true){
-            wall.setY(Phaser.Math.Between(this.min_y, this.max_y))
+            wall.setY(Phaser.Math.Between(100, 560))
         }
         else{
             wall.setY(Phaser.Math.Between(wall.min_y, wall.max_y))
